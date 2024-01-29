@@ -1,0 +1,8 @@
+"ID","Title","Created By","Created On","Estimate","Forecast","Priority","References","Section","Section Depth","Section Description","Suite","Suite ID","Type","Updated By","Updated On"
+"C7","Stworzenie User","Kamil Piątek","1/29/2024 7:55 PM","","","Medium","","Funkcje User","1","","Master","S1","Functional","Kamil Piątek","1/29/2024 8:10 PM"
+"C8","Dodanie informacji do User","Kamil Piątek","1/29/2024 7:56 PM","","","Medium","","Funkcje User","1","","Master","S1","Functional","Kamil Piątek","1/29/2024 8:14 PM"
+"C9","Poprawne logowanie","Kamil Piątek","1/29/2024 7:57 PM","","","Medium","","Funkcje User","1","","Master","S1","Functional","Kamil Piątek","1/29/2024 8:16 PM"
+"C10","Wylogowanie User","Kamil Piątek","1/29/2024 7:57 PM","","","Medium","","Funkcje User","1","","Master","S1","Functional","Kamil Piątek","1/29/2024 8:18 PM"
+"C11","Usunięcie User","Kamil Piątek","1/29/2024 7:59 PM","","","Medium","","Funkcje User","1","","Master","S1","Functional","Kamil Piątek","1/29/2024 8:21 PM"
+"C12","Logowanie Usuniętym User","Kamil Piątek","1/29/2024 8:00 PM","","","Medium","","Funkcje User","1","","Master","S1","Functional","Kamil Piątek","1/29/2024 8:24 PM"
+"C13","Niepoprawne logowanie- Brak danych","Kamil Piątek","1/29/2024 8:02 PM","","","Medium","","Funkcje User","1","","Master","S1","Functional","Kamil Piątek","1/29/2024 8:26 PM"

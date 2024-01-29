@@ -1,0 +1,239 @@
+{
+	"info": {
+		"_postman_id": "93e11fa3-2b2c-406a-9a51-52e31e754d24",
+		"name": "TestStore",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30194184"
+	},
+	"item": [
+		{
+			"name": "DodaniePet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"var pet2 = pm.response.json()\r",
+							"\r",
+							"pm.collectionVariables.set(\"petID\", pet2.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 45678,\r\n  \"category\": {\r\n    \"id\": 10,\r\n    \"name\": \"shi-tzu\"\r\n  },\r\n  \"name\": \"Dora\",\r\n  \"photoUrls\": [\r\n    \"string\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 10,\r\n      \"name\": \"dogs\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/pet",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DodanieZamówienia",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"var order1 = pm.response.json()\r",
+							"pm.collectionVariables.set(\"orderID\",order1.id);\r",
+							"\r",
+							"pm.collectionVariables.set(\"quantity\",order1.quantity);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 1010,\r\n  \"petId\": {{petID}},\r\n  \"quantity\": 10,\r\n  \"shipDate\": \"2024-01-29T14:07:27.850Z\",\r\n  \"status\": \"placed\",\r\n  \"complete\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/store/order",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"store",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SprawdzZamówienie",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var order = pm.response.json()\r",
+							"pm.test(\"Poprawne wartości\", function () {\r",
+							"    pm.expect(order.id).to.be.eql(pm.collectionVariables.get(\"orderID\"))\r",
+							"    pm.expect(order.petId).to.be.eql(pm.collectionVariables.get(\"petID\"))\r",
+							"    pm.expect(order.quantity).to.be.eql(pm.collectionVariables.get(\"quantity\"))\r",
+							"\r",
+							"\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/store/order/{{orderID}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"store",
+						"order",
+						"{{orderID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UsunZamówienie",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/store/order/{{orderID}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"store",
+						"order",
+						"{{orderID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SprawdzUsuniecie",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"pm.test(\"Zamówienie nie istnieje\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Order not found\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/store/order/{{orderID}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"store",
+						"order",
+						"{{orderID}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "petID",
+			"value": ""
+		},
+		{
+			"key": "orderID",
+			"value": ""
+		},
+		{
+			"key": "quantity",
+			"value": ""
+		}
+	]
+}
